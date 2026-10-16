@@ -10,46 +10,6 @@ const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '
 const readJSON = (key, fallback) => { try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch { return fallback; } };
 const writeJSON = (key, val) => { try { localStorage.setItem(key, JSON.stringify(val)); } catch {} };
 
-/*Dữ liệu sản phẩm*/
-//giỏ hàng, bình luận và tìm kiếm đều dựa vào id
-const products = {
-  sale: [
-    { id: 'sale1', name: 'Asus Zenbook 14', price: 24990000, oldPrice: 30000000, img: 'image/Laptop1.jpg', desc: 'Màn hình OLED 14 inch, Core Ultra 7, RAM 16GB, SSD 512GB.' },
-    { id: 'sale2', name: 'Acer Aspire 7', price: 17990000, oldPrice: 25000000, img: 'image/Laptop2.jpg', desc: 'Màn hình OLED 15 inch, Core Ultra 5, RAM 8GB, SSD 1TB.' },
-    { id: 'sale3', name: 'Iphone 17 Pro Max', price: 19990000, oldPrice: 27000000, img: 'image/phone1.jpg', desc: 'Màn hình OLED 14 inch, Core Ultra 7, RAM 16GB, SSD 512GB.' },
-    { id: 'sale4', name: 'Asus Vivobook 12', price: 20990000, oldPrice: 28000000, img: 'image/Laptop3.jpg', desc: 'Màn hình OLED 14 inch, Core Ultra 7, RAM 16GB, SSD 512GB.' },
-    { id: 'sale5', name: 'Omnibook Laptop', price: 22990000, oldPrice: 29000000, img: 'image/Laptop4.jpg', desc: 'Màn hình OLED 14 inch, Core Ultra 7, RAM 16GB, SSD 512GB.' }
-  ],
-  laptop: [
-    { id: 'lt1', name: 'Asus Zenbook 15', price: 24990000, img: 'image/laptop/laptop1.jpg' },
-    { id: 'lt2', name: 'HP Pavilion', price: 28990000, img: 'image/laptop/laptop2.jpg' },
-    { id: 'lt3', name: 'Acer Aspire 10', price: 19990000, img: 'image/laptop/laptop3.jpg' },
-    { id: 'lt4', name: 'Lenovo ThinkBook', price: 21990000, img: 'image/laptop/laptop4.jpg' },
-    { id: 'lt5', name: 'Asus Vivobook 15', price: 23990000, img: 'image/laptop/laptop5.jpg' }
-  ],
-  phone: [
-    { id: 'ph1', name: 'Samsung Galaxy A50', price: 19990000, img: 'image/dienthoai/phone-1.jpg' },
-    { id: 'ph2', name: 'OPPO RENO 16', price: 18990000, img: 'image/dienthoai/phone-2.jpg' },
-    { id: 'ph3', name: 'Xiaomi Note 17', price: 16990000, img: 'image/dienthoai/phone-3.jpg' },
-    { id: 'ph4', name: 'Redmi Note 15 Pro', price: 23990000, img: 'image/dienthoai/phone-4.jpg' },
-    { id: 'ph5', name: 'Iphone 18 Pro Max', price: 39990000, img: 'image/dienthoai/phone-5.jpg' }
-  ],
-  accessory: [
-    { id: 'pk1', name: 'Micro Elgato 3', price: 390000, img: 'image/phukien/pk1.jpg' },
-    { id: 'pk2', name: 'Balo chống sốc Targus', price: 290000, img: 'image/phukien/pk2.jpg' },
-    { id: 'pk3', name: 'Ổ cứng SSD Super Charge', price: 2990000, img: 'image/phukien/pk3.jpg' },
-    { id: 'pk4', name: 'Lót chuột Logitech', price: 10000, img: 'image/phukien/pk4.jpg' },
-    { id: 'pk5', name: 'Đèn treo tường Helix', price: 70000, img: 'image/phukien/pk5.jpg' }
-  ],
-  device: [
-    { id: 'dv1', name: 'Tai nghe Tiger', price: 790000, img: 'image/thietbi/tb1.jpg' },
-    { id: 'dv2', name: 'Tai nghe Corsair', price: 990000, img: 'image/thietbi/tb2.jpg' },
-    { id: 'dv3', name: 'Loa Logitech A2', price: 2990000, img: 'image/thietbi/tb3.jpg' },
-    { id: 'dv4', name: 'Màn hình phụ Asus', price: 3990000, img: 'image/thietbi/tb4.jpg' },
-    { id: 'dv5', name: 'Đồng hồ phụ LG', price: 990000, img: 'image/thietbi/tb5.jpg' }
-  ]
-};
-
 // Tra cứu nhanh theo id
 const productById = {};
 Object.values(products).flat().forEach(p => { productById[p.id] = p; });
@@ -134,6 +94,7 @@ $('checkout').addEventListener('click', () => {
 
 /*Banner băng chuyền*/
 (function () {
+  if (!document.getElementById('banner')) return;
   const box = $('banner'), slides = $('slides'), dotsBox = $('dots');
   const count = slides.children.length;
   const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -209,7 +170,7 @@ function renderComments() {
     ? '★ ' + (list.reduce((s, c) => s + c.rating, 0) / list.length).toFixed(1) + ' (' + list.length + ' đánh giá)'
     : 'Chưa có đánh giá';
 }
-
+//Check info sản phẩm.
 function openProduct(id) {
   const p = productById[id];
   if (!p) return;
@@ -234,7 +195,7 @@ function closeProduct() {
   document.body.style.overflow = '';
   if (lastFocus) lastFocus.focus();
 }
-
+//đóng info sản phẩm
 modal.addEventListener('click', e => { if (e.target === modal) closeProduct(); });
 $('pmClose').addEventListener('click', closeProduct);
 $('pmAdd').addEventListener('click', () => {
@@ -285,7 +246,7 @@ document.addEventListener('keydown', e => {
 
 renderCart();
 
-//Trạng thái đăng nhập
+/*Trạng thái đăng nhập*/
 const user = readJSON('user', null);
 const loginLink = document.querySelector('a.act[href="dangnhap.html"]');
 if (user && loginLink) {
@@ -297,4 +258,20 @@ if (user && loginLink) {
       location.reload();
     }
   });
+}
+
+//Trạng thái đăng nhập
+if (user && loginLink) {
+  loginLink.lastChild.textContent = user.name;
+  if (user.mode === 'admin') {
+    loginLink.href = 'admin.html';
+  } else {
+    loginLink.addEventListener('click', e => {
+      e.preventDefault();
+      if (confirm('Đăng xuất khỏi tài khoản "' + user.name + '"?')) {
+        try { localStorage.removeItem('user'); } catch {}
+        location.reload();
+      }
+    });
+  }
 }
