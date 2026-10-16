@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Đăng nhập - Phúc Khang</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dangnhap.css">
+</head>
+<body>
+<main class="wrap">
+  <a class="back" href="index.html">‹ Về trang chủ</a>
+
+  <section class="box">
+    <img class="logo" src="image/logo.png" alt="Phúc Khang">
+    <h1>Đăng nhập</h1>
+    <p class="sub">Chọn cách bạn muốn tiếp tục</p>
+
+    <div class="tabs" role="tablist" aria-label="Chế độ đăng nhập">
+      <button type="button" role="tab" id="tabUser" aria-selected="true" aria-controls="panelUser">Tài khoản Gmail</button>
+      <button type="button" role="tab" id="tabGuest" aria-selected="false" aria-controls="panelGuest" tabindex="-1">Chế độ khách</button>
+    </div>
+
+    <!-- Chế độ 1: đăng nhập bằng Gmail -->
+    <form id="panelUser" role="tabpanel" aria-labelledby="tabUser" novalidate>
+      <label for="email">Gmail hoặc tên đăng nhập</label>
+      <input id="email" type="text" autocomplete="username" placeholder="abcxyz hoặc abcxyz@gmail.com">
+
+      <label for="pass">Mật khẩu</label>
+      <div class="pass">
+        <input id="pass" type="password" autocomplete="current-password" placeholder="Nhập mật khẩu">
+        <button type="button" id="togglePass" aria-label="Hiện mật khẩu">Hiện</button>
+      </div>
+
+      <p id="msg" class="msg" role="alert" aria-live="polite"></p>
+      <button type="submit" class="primary">Đăng nhập</button>
+      <p class="hint">Tài khoản thử nghiệm: <b>abcxyz</b> / mật khẩu <b>123</b></p>
+    </form>
+
+    <!-- Chế độ 2: khách -->
+    <div id="panelGuest" role="tabpanel" aria-labelledby="tabGuest" hidden>
+      <p class="guest-text">Xem sản phẩm và thêm vào giỏ hàng mà không cần tài khoản. Bạn có thể đăng nhập lại bất cứ lúc nào.</p>
+      <button type="button" id="guestBtn" class="primary dark">Tiếp tục với tư cách khách</button>
+    </div>
+  </section>
+</main>
+<script src="dangnhap.js"></script>
+</body>
+</html>

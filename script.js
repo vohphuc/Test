@@ -109,7 +109,7 @@ function renderCart() {
       '<div class="qty"><button data-act="dec" data-id="' + id + '" aria-label="Giảm">−</button>' +
       '<span>' + x.qty + '</span>' +
       '<button data-act="inc" data-id="' + id + '" aria-label="Tăng">+</button></div>' +
-      '<button class="rm" data-act="rm" data-id="' + id + '" aria-label="Xóa">🗑</button></li>';
+      '<button class="rm" data-act="rm" data-id="' + id + '" aria-label="Xóa">Xóa</button></li>';
   }).join('') : '<li class="empty">Giỏ hàng đang trống. Chọn sản phẩm để thêm vào giỏ.</li>';
 
   $('cartTotal').textContent = fmt(cart.reduce((s, x) => s + productById[x.id].price * x.qty, 0));
@@ -284,3 +284,17 @@ document.addEventListener('keydown', e => {
 });
 
 renderCart();
+
+//Trạng thái đăng nhập
+const user = readJSON('user', null);
+const loginLink = document.querySelector('a.act[href="dangnhap.html"]');
+if (user && loginLink) {
+  loginLink.lastChild.textContent = user.name;
+  loginLink.addEventListener('click', e => {
+    e.preventDefault();
+    if (confirm('Đăng xuất khỏi tài khoản "' + user.name + '"?')) {
+      try { localStorage.removeItem('user'); } catch {}
+      location.reload();
+    }
+  });
+}
