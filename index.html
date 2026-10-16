@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Phúc Khang Technology</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo"><img src="image/logo.png" alt="Phúc Khang"></div>
+
+  <div class="mid">
+    <div class="search">
+      <h2>Tìm kiếm</h2>
+      <div class="sbox">
+        <form id="searchForm" role="search" autocomplete="off">
+          <input type="search" id="searchInput" placeholder="Nhập tên sản phẩm..." aria-label="Tìm kiếm sản phẩm" aria-controls="searchResults">
+          <button type="submit" aria-label="Tìm">🔍</button>
+        </form>
+        <ul id="searchResults" class="results" hidden></ul>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html">Trang chủ</a><a href="#">Tìm hiểu</a><a href="#uudaicucsoc">Khuyến mãi</a><a href="#footer">Liên hệ</a>
+    </nav>
+  </div>
+
+  <div class="acts">
+    <a class="act" href="#" id="cartBtn"><img src="image/giohang.png" alt="">Giỏ hàng<span id="cartCount" class="badge">0</span></a>
+    <a class="act" href="dangnhap.html"><img src="image/dangnhap.png" alt="">Đăng nhập</a>
+  </div>
+</header>
+
+<div class="hero">
+  <nav class="cat"><a href="#laptop">Laptop</a><a href="#dienthoai">Điện thoại</a><a href="#phukien">Phụ kiện</a><a href="#thietbi">Thiết bị</a></nav>
+  <div class="banner" id="banner" aria-roledescription="carousel" aria-label="Banner quảng cáo">
+  <div class="slides" id="slides">
+    <img src="image/banner1.png" alt="Banner 1">
+    <img src="image/banner2.png" alt="Banner 2">
+    <img src="image/banner3.png" alt="Banner 3">
+  </div>
+  <button class="nav-btn prev" id="prevBanner" aria-label="Ảnh trước">‹</button>
+  <button class="nav-btn next" id="nextBanner" aria-label="Ảnh sau">›</button>
+  <div class="dots" id="dots"></div>
+  </div>
+  <a class="ad" href="#" aria-label="Quảng cáo">
+    <img src="image/ad.png" alt="Quảng cáo">
+  </a>
+</div>
+
+<section class="sec" id="uudaicucsoc">
+  <div class="sec-head"><h2>ƯU ĐÃI CỰC SỐC</h2><a class="more" href="uudai.html">Xem thêm ›</a></div>
+  <div class="row" data-cat="sale"></div>
+</section>
+
+<section class="sec" id="laptop">
+  <div class="sec-head"><h2>LAPTOP</h2><a class="more" href="laptop.html">Xem thêm ›</a></div>
+  <div class="row" data-cat="laptop"></div>
+</section>
+
+<section class="sec" id="dienthoai">
+  <div class="sec-head"><h2>ĐIỆN THOẠI</h2><a class="more" href="dienthoai.html">Xem thêm ›</a></div>
+  <div class="row" data-cat="phone"></div>
+</section>
+
+<section class="sec" id="phukien">
+  <div class="sec-head"><h2>PHỤ KIỆN</h2><a class="more" href="phukien.html">Xem thêm ›</a></div>
+  <div class="row" data-cat="accessory"></div>
+</section>
+
+<section class="sec" id="thietbi">
+  <div class="sec-head"><h2>THIẾT BỊ</h2><a class="more" href="thietbi.html">Xem thêm ›</a></div>
+  <div class="row" data-cat="device"></div>
+</section>
+
+<footer id="footer">
+  <div><h4>Địa chỉ</h4><p>Cơ sở 1: 45 Đ. Bùi Văn Thêm, Đức Nhuận, Hồ Chí Minh</p><p>Cơ sở 2: 613 Đ. Âu Cơ, Tân Phú, Hồ Chí Minh</p></div>
+  <div><h4>Hỗ trợ khách hàng</h4><p>Thẻ ưu đãi</p><p>Hướng dẫn mua online</p><p>Chính sách trả góp</p><p>Dịch vụ sửa chữa</p><p>Dịch vụ hội viên</p></div>
+  <div><h4>Chính sách</h4><p>Điều khoản và điều kiện</p><p>Các câu hỏi thường gặp</p><p>Chính sách và quyền riêng tư</p></div>
+  <div><h4>Thông tin liên hệ</h4><p>Phản hồi về chất lượng dịch vụ</p><p>Liên hệ với chúng tôi</p>
+  <div class="soc">
+    <a class="zalo" href="https://zalo.me" target="_blank" rel="noopener noreferrer" aria-label="Zalo">Zalo</a>
+    <a class="fb" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+    <a class="tt" href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">♪</a>
+  </div>
+</div>
+  <div><h4>Email</h4><p>phamkhang2006@gmail.com</p><p>Hoặc</p><p>phuc@gmail.com</p></div>
+</footer>
+
+<div id="overlay" class="overlay" hidden></div>
+<aside id="drawer" class="drawer" aria-label="Giỏ hàng" aria-hidden="true">
+  <div class="drawer-head"><h3>Giỏ hàng</h3><button id="closeCart" aria-label="Đóng">✕</button></div>
+  <ul id="cartList" class="cart-list"></ul>
+  <div class="drawer-foot">
+    <div class="total"><span>Tổng cộng</span><b id="cartTotal">0₫</b></div>
+    <button id="checkout" class="pay">Thanh toán</button>
+  </div>
+</aside>
+
+<div id="pmodal" class="pmodal" hidden>
+  <div class="pm-box" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+    <button class="pm-close" id="pmClose" aria-label="Đóng">✕</button>
+
+    <div class="pm-top">
+      <div class="pm-img"><img id="pmImg" src="" alt=""></div>
+      <div class="pm-info">
+        <h3 id="pmTitle"></h3>
+        <div class="pm-rating" id="pmRating"></div>
+        <div class="pm-price"><em id="pmPrice"></em><s id="pmOld"></s><span id="pmOff"></span></div>
+        <p class="pm-desc" id="pmDesc"></p>
+        <div class="pm-actions">
+          <button type="button" class="pm-add" id="pmAdd">Thêm vào giỏ</button>
+          <button type="button" class="pm-buy" id="pmBuy">Thanh toán</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pm-comments">
+      <h4>Bình luận (<span id="cmCount">0</span>)</h4>
+      <form id="cmForm" autocomplete="off">
+        <div class="cm-row">
+          <input id="cmName" type="text" placeholder="Tên của bạn" maxlength="40" required>
+          <select id="cmRating" aria-label="Đánh giá">
+            <option value="5">★★★★★ (5)</option>
+            <option value="4">★★★★☆ (4)</option>
+            <option value="3">★★★☆☆ (3)</option>
+            <option value="2">★★☆☆☆ (2)</option>
+            <option value="1">★☆☆☆☆ (1)</option>
+          </select>
+        </div>
+        <textarea id="cmText" rows="3" placeholder="Viết bình luận của bạn..." maxlength="500" required></textarea>
+        <button type="submit" class="cm-send">Gửi bình luận</button>
+      </form>
+      <ul id="cmList" class="cm-list"></ul>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
