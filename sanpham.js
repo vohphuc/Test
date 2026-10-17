@@ -9,11 +9,11 @@
 const products = {
   /* ---------- Trang chủ ---------- */
   sale: [
-    { id: 'sale1', name: 'Asus Zenbook 14', price: 24990000, oldPrice: 30000000, img: 'image/Laptop1.jpg', desc: 'Màn hình OLED 14 inch, Core Ultra 7, RAM 16GB, SSD 512GB.' },
-    { id: 'sale2', name: 'Acer Aspire 7', price: 17990000, oldPrice: 25000000, img: 'image/Laptop2.jpg' },
-    { id: 'sale3', name: 'Iphone 17 Pro Max', price: 19990000, oldPrice: 27000000, img: 'image/phone1.jpg' },
-    { id: 'sale4', name: 'Asus Vivobook 12', price: 20990000, oldPrice: 28000000, img: 'image/Laptop3.jpg' },
-    { id: 'sale5', name: 'Omnibook Laptop', price: 22990000, oldPrice: 29000000, img: 'image/Laptop4.jpg' }
+    { id: 'sale1', name: 'Asus Zenbook 14', price: 24990000, oldPrice: 30000000, img: 'image/Uudai1.jpg', desc: 'Màn hình OLED 14 inch, Core Ultra 7, RAM 16GB, SSD 512GB.' },
+    { id: 'sale2', name: 'Acer Aspire 7', price: 17990000, oldPrice: 25000000, img: 'image/Uudai2.jpg' },
+    { id: 'sale3', name: 'Iphone 17 Pro Max', price: 19990000, oldPrice: 27000000, img: 'image/Uudai3.jpg' },
+    { id: 'sale4', name: 'Asus Vivobook 12', price: 20990000, oldPrice: 28000000, img: 'image/Uudai4.jpg' },
+    { id: 'sale5', name: 'Omnibook Laptop', price: 22990000, oldPrice: 29000000, img: 'image/Uudai5.jpg' }
   ],
   laptop: [
     { id: 'lt1', name: 'Asus Zenbook 15', price: 24990000, img: 'image/laptop/laptop1.jpg' },
