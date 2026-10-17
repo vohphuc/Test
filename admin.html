@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quản trị - Phúc Khang</title>
+<script>
+try { var u = JSON.parse(localStorage.getItem('user')); if (!u || u.mode !== 'admin') location.replace('dangnhap.html'); }
+catch (e) { location.replace('dangnhap.html'); }
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<header class="top">
+  <h1>Trang quản trị</h1>
+  <div class="who"><span>Xin chào, <b id="who">Admin</b></span>
+    <a class="btn" href="index.html">Về trang chủ</a>
+    <button type="button" class="btn out" id="logout">Đăng xuất</button></div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Chức năng quản trị">
+  <button class="tab on" role="tab" aria-selected="true" data-p="pSales">Doanh số</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="pProducts">Sản phẩm</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="pStaff">Nhân viên</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="pReviews">Đánh giá</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="pAccounts">Tài khoản</button>
+</nav>
+
+<main class="wrap">
+  <!-- Doanh số -->
+  <section class="pnl" id="pSales">
+    <div class="bar"><h2>Mặt hàng đã bán</h2>
+      <div class="ctl"><label class="sr" for="period">Khoảng thời gian</label>
+        <select id="period"><option value="1">1 ngày qua</option><option value="7">1 tuần qua</option></select>
+        <button class="act" id="seedOrders">Tạo đơn mẫu</button></div></div>
+    <div class="stats"><div class="stat"><span>Doanh số</span><b id="rev">0₫</b></div>
+      <div class="stat"><span>Số đơn</span><b id="ordN">0</b></div>
+      <div class="stat"><span>Số mặt hàng đã bán</span><b id="itemN">0</b></div></div>
+    <div class="tw"><table><thead><tr><th>Mặt hàng</th><th class="r">Số lượng</th><th class="r">Doanh thu</th></tr></thead><tbody id="sRows"></tbody></table></div>
+    <p class="empty" id="sEmpty" hidden>Chưa có đơn hàng trong khoảng thời gian này.</p>
+  </section>
+
+  <!-- Sản phẩm -->
+  <section class="pnl" id="pProducts" hidden>
+    <div class="bar"><h2>Quản lý sản phẩm (<span id="pCount">0</span>)</h2>
+      <input id="pq" type="search" placeholder="Tìm theo tên hoặc mã..." aria-label="Tìm sản phẩm"></div>
+    <form class="frm" id="pForm">
+      <select id="pCat" aria-label="Nhóm" required></select>
+      <input id="pName" placeholder="Tên sản phẩm" required>
+      <input id="pPrice" type="number" min="0" placeholder="Giá bán" required>
+      <input id="pOld" type="number" min="0" placeholder="Giá cũ (nếu giảm giá)">
+      <input id="pImg" placeholder="Đường dẫn ảnh, vd image/laptop/a.jpg">
+      <input id="pDesc" placeholder="Mô tả ngắn">
+      <button class="act" type="submit">Thêm sản phẩm</button>
+    </form>
+    <p class="msg" id="pMsg" role="status"></p>
+    <div class="tw"><table><thead><tr><th>Mã</th><th>Tên</th><th>Nhóm</th><th class="r">Giá</th><th></th></tr></thead><tbody id="pRows"></tbody></table></div>
+  </section>
+
+  <!-- Nhân viên -->
+  <section class="pnl" id="pStaff" hidden>
+    <div class="bar"><h2>Quản lý nhân viên</h2></div>
+    <form class="frm" id="stForm">
+      <input id="stName" placeholder="Họ tên" required>
+      <select id="stRole" aria-label="Chức vụ"><option>Bán hàng</option><option>Kỹ thuật</option><option>Kho</option><option>Quản lý</option></select>
+      <input id="stPhone" type="tel" placeholder="Số điện thoại" required>
+      <button class="act" type="submit">Thêm nhân viên</button>
+    </form>
+    <div class="tw"><table><thead><tr><th>Họ tên</th><th>Chức vụ</th><th>Điện thoại</th><th></th></tr></thead><tbody id="stRows"></tbody></table></div>
+    <p class="empty" id="stEmpty" hidden>Chưa có nhân viên.</p>
+  </section>
+
+  <!-- Đánh giá -->
+  <section class="pnl" id="pReviews" hidden>
+    <div class="bar"><h2>Đánh giá sản phẩm (<span id="rvCount">0</span>)</h2></div>
+    <div class="tw"><table><thead><tr><th>Sản phẩm</th><th>Người đánh giá</th><th>Sao</th><th>Nội dung</th><th>Ngày</th><th></th></tr></thead><tbody id="rvRows"></tbody></table></div>
+    <p class="empty" id="rvEmpty" hidden>Chưa có đánh giá nào.</p>
+  </section>
+
+  <!-- Tài khoản -->
+  <section class="pnl" id="pAccounts" hidden>
+    <div class="bar"><h2>Tài khoản đã đăng ký</h2><button class="act" id="seedAcc">Tạo tài khoản mẫu</button></div>
+    <div class="tw"><table><thead><tr><th>Tên đăng nhập</th><th>Email</th><th>Ngày đăng ký</th><th></th></tr></thead><tbody id="acRows"></tbody></table></div>
+    <p class="empty" id="acEmpty" hidden>Chưa có tài khoản nào đăng ký.</p>
+  </section>
+</main>
+
+<script src="sanpham.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

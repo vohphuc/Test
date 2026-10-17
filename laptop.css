@@ -1,0 +1,24 @@
+/* css cho laptop */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.logo a{display:block;width:100%;height:100%}
+.page-head{padding:28px 24px 10px}
+.crumb{font-size:14px;color:#666;margin-bottom:10px}
+.crumb a{color:var(--accent)}
+.crumb a:hover{text-decoration:underline}
+.page-head h1{font-size:34px;font-weight:900}
+.lead{margin:6px 0 18px;color:#555;max-width:720px;line-height:1.5}
+
+.toolbar{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chip{padding:9px 18px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font:inherit;font-weight:500;font-size:14px;cursor:pointer}
+.chip:hover{background:#eee}
+.chip.on{background:#000;color:#fff;border-color:#000}
+.chip:focus-visible,.tools select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.tools{display:flex;gap:12px;align-items:center;font-size:14px;color:#555}
+.tools select{padding:9px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff;color:var(--ink)}
+
+.sec[hidden]{display:none}
+.sec-sub{color:#666;font-size:14px;text-align:right;max-width:55%}
+/*Nếu một loại có hơn 5 sản phẩm thì các hàng sau có đường kẻ ngăn*/
+.row .card:nth-child(n+6){border-top:1px solid var(--line)}
+@media(max-width:760px){.sec-head{flex-direction:column;gap:2px}.sec-sub{text-align:left;max-width:100%;padding:0 24px 8px}.page-head{padding:20px 14px 8px}}

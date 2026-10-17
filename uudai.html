@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ưu đãi cực sốc - Phúc Khang Technology</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="uudai.css">
+</head>
+<body>
+<header>
+  <div class="logo"><a href="index.html"><img src="image/logo.png" alt="Phúc Khang"></a></div>
+
+  <div class="mid">
+    <div class="search">
+      <h2>Tìm kiếm</h2>
+      <div class="sbox">
+        <form id="searchForm" role="search" autocomplete="off">
+          <input type="search" id="searchInput" placeholder="Nhập tên sản phẩm..." aria-label="Tìm kiếm sản phẩm" aria-controls="searchResults">
+          <button type="submit" aria-label="Tìm">Tìm kiếm</button>
+        </form>
+        <ul id="searchResults" class="results" hidden></ul>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html">Trang chủ</a><a href="#">Tìm hiểu</a><a href="uudai.html">Khuyến mãi</a><a href="#footer">Liên hệ</a>
+    </nav>
+  </div>
+
+  <div class="acts">
+    <a class="act" href="#" id="cartBtn"><img src="image/giohang.png" alt="">Giỏ hàng<span id="cartCount" class="badge">0</span></a>
+    <a class="act" href="dangnhap.html"><img src="image/dangnhap.png" alt="">Đăng nhập</a>
+  </div>
+</header>
+
+<main>
+  <div class="page-head">
+    <nav class="crumb" aria-label="Đường dẫn"><a href="index.html">Trang chủ</a> › <span>Ưu đãi cực sốc</span></nav>
+    <h1>ƯU ĐÃI CỰC SỐC</h1>
+
+    <div class="promo">
+      <div>
+        <h2>Giá sốc kết thúc trong ngày</h2>
+        <p>Số lượng có hạn, hết giờ giá sẽ quay về như cũ.</p>
+      </div>
+      <div class="timer" role="timer" aria-label="Thời gian còn lại của ưu đãi hôm nay">
+        <b id="hh">00</b><span aria-hidden="true">:</span><b id="mm">00</b><span aria-hidden="true">:</span><b id="ss">00</b>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="chips" id="chips" role="group" aria-label="Lọc ưu đãi theo loại">
+        <button type="button" class="chip on" data-type="all" aria-pressed="true">Tất cả</button>
+        <button type="button" class="chip" data-type="flash" aria-pressed="false">Giá sốc hôm nay</button>
+        <button type="button" class="chip" data-type="laptop" aria-pressed="false">Laptop</button>
+        <button type="button" class="chip" data-type="phone" aria-pressed="false">Điện thoại</button>
+        <button type="button" class="chip" data-type="accessory" aria-pressed="false">Phụ kiện &amp; thiết bị</button>
+      </div>
+      <div class="tools">
+        <span id="count" aria-live="polite"></span>
+        <label for="sort" class="sr">Sắp xếp</label>
+        <select id="sort">
+          <option value="default">Sắp xếp: Mặc định</option>
+          <option value="pct">Giảm nhiều nhất</option>
+          <option value="asc">Giá thấp đến cao</option>
+          <option value="desc">Giá cao đến thấp</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <section class="sec" id="flash" data-type="flash">
+    <div class="sec-head"><h2>GIÁ SỐC HÔM NAY</h2><p class="sec-sub">Giảm sâu, chỉ áp dụng trong ngày.</p></div>
+    <div class="row" data-cat="saleFlash"></div>
+  </section>
+
+  <section class="sec" id="laptop" data-type="laptop">
+    <div class="sec-head"><h2>LAPTOP GIẢM GIÁ</h2><p class="sec-sub">Gaming, văn phòng, mỏng nhẹ với mức giá tốt nhất.</p></div>
+    <div class="row" data-cat="saleLaptop"></div>
+  </section>
+
+  <section class="sec" id="phone" data-type="phone">
+    <div class="sec-head"><h2>ĐIỆN THOẠI GIẢM GIÁ</h2><p class="sec-sub">Các dòng flagship và tầm trung đang được giảm.</p></div>
+    <div class="row" data-cat="salePhone"></div>
+  </section>
+
+  <section class="sec" id="accessory" data-type="accessory">
+    <div class="sec-head"><h2>PHỤ KIỆN &amp; THIẾT BỊ GIẢM GIÁ</h2><p class="sec-sub">Tai nghe, loa, ổ cứng, màn hình và nhiều hơn nữa.</p></div>
+    <div class="row" data-cat="saleAccessory"></div>
+  </section>
+</main>
+
+<footer id="footer">
+  <div><h4>Địa chỉ</h4><p>Cơ sở 1: 45 Đ. Bùi Văn Thêm, Đức Nhuận, Hồ Chí Minh</p><p>Cơ sở 2: 613 Đ. Âu Cơ, Tân Phú, Hồ Chí Minh</p></div>
+  <div><h4>Hỗ trợ khách hàng</h4><p>Thẻ ưu đãi</p><p>Hướng dẫn mua online</p><p>Chính sách trả góp</p><p>Dịch vụ sửa chữa</p><p>Dịch vụ hội viên</p></div>
+  <div><h4>Chính sách</h4><p>Điều khoản và điều kiện</p><p>Các câu hỏi thường gặp</p><p>Chính sách và quyền riêng tư</p></div>
+  <div><h4>Thông tin liên hệ</h4><p>Phản hồi về chất lượng dịch vụ</p><p>Liên hệ với chúng tôi</p>
+    <div class="soc">
+      <a class="zalo" href="https://zalo.me" target="_blank" rel="noopener noreferrer" aria-label="Zalo">Zalo</a>
+      <a class="fb" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+      <a class="tt" href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">♪</a>
+    </div>
+  </div>
+  <div><h4>Email</h4><p>phamkhang2006@gmail.com</p><p>Hoặc</p><p>phuc@gmail.com</p></div>
+</footer>
+
+<div id="overlay" class="overlay" hidden></div>
+<aside id="drawer" class="drawer" aria-label="Giỏ hàng" aria-hidden="true">
+  <div class="drawer-head"><h3>Giỏ hàng</h3><button id="closeCart" aria-label="Đóng">✕</button></div>
+  <ul id="cartList" class="cart-list"></ul>
+  <div class="drawer-foot">
+    <div class="total"><span>Tổng cộng</span><b id="cartTotal">0₫</b></div>
+    <button id="checkout" class="pay">Thanh toán</button>
+  </div>
+</aside>
+
+<div id="pmodal" class="pmodal" hidden>
+  <div class="pm-box" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+    <button class="pm-close" id="pmClose" aria-label="Đóng">✕</button>
+
+    <div class="pm-top">
+      <div class="pm-img"><img id="pmImg" src="" alt=""></div>
+      <div class="pm-info">
+        <h3 id="pmTitle"></h3>
+        <div class="pm-rating" id="pmRating"></div>
+        <div class="pm-price"><em id="pmPrice"></em><s id="pmOld"></s><span id="pmOff"></span></div>
+        <p class="pm-desc" id="pmDesc"></p>
+        <div class="pm-actions">
+          <button type="button" class="pm-add" id="pmAdd">Thêm vào giỏ</button>
+          <button type="button" class="pm-buy" id="pmBuy">Thanh toán</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pm-comments">
+      <h4>Bình luận (<span id="cmCount">0</span>)</h4>
+      <form id="cmForm" autocomplete="off">
+        <div class="cm-row">
+          <input id="cmName" type="text" placeholder="Tên của bạn" maxlength="40" required>
+          <select id="cmRating" aria-label="Đánh giá">
+            <option value="5">★★★★★ (5)</option>
+            <option value="4">★★★★☆ (4)</option>
+            <option value="3">★★★☆☆ (3)</option>
+            <option value="2">★★☆☆☆ (2)</option>
+            <option value="1">★☆☆☆☆ (1)</option>
+          </select>
+        </div>
+        <textarea id="cmText" rows="3" placeholder="Viết bình luận của bạn..." maxlength="500" required></textarea>
+        <button type="submit" class="cm-send">Gửi bình luận</button>
+      </form>
+      <ul id="cmList" class="cm-list"></ul>
+    </div>
+  </div>
+</div>
+
+<script src="sanpham.js"></script>
+<script src="script.js"></script>
+<script src="uudai.js"></script>
+</body>
+</html>

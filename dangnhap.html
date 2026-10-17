@@ -13,16 +13,16 @@
 
   <section class="box">
     <img class="logo" src="image/logo.png" alt="Phúc Khang">
-    <h1>Đăng nhập</h1>
-    <p class="sub">Chọn cách bạn muốn tiếp tục</p>
+    <h1>Tài khoản</h1>
+    <p class="sub">Đăng nhập hoặc tạo tài khoản mới</p>
 
-    <div class="tabs" role="tablist" aria-label="Chế độ đăng nhập">
-      <button type="button" role="tab" id="tabUser" aria-selected="true" aria-controls="panelUser">Tài khoản</button>
-      <button type="button" role="tab" id="tabGuest" aria-selected="false" aria-controls="panelGuest" tabindex="-1">Khách</button>
+    <div class="tabs" role="tablist" aria-label="Chế độ tài khoản">
+      <button type="button" role="tab" id="tabUser" aria-selected="true" aria-controls="panelUser">Đăng nhập</button>
+      <button type="button" role="tab" id="tabRegister" aria-selected="false" aria-controls="panelRegister" tabindex="-1">Đăng ký</button>
       <button type="button" role="tab" id="tabAdmin" aria-selected="false" aria-controls="panelAdmin" tabindex="-1">Quản trị viên</button>
     </div>
 
-    <!-- Chế độ 1: tài khoản thường (Gmail) -->
+    <!-- Tab 1: đăng nhập (kèm chế độ khách bên dưới) -->
     <form id="panelUser" role="tabpanel" aria-labelledby="tabUser" novalidate>
       <label for="email">Gmail hoặc tên đăng nhập</label>
       <input id="email" type="text" autocomplete="username" placeholder="abcxyz hoặc abcxyz@gmail.com">
@@ -36,15 +36,34 @@
       <p id="msg" class="msg" role="alert" aria-live="polite"></p>
       <button type="submit" class="primary">Đăng nhập</button>
       <p class="hint">Tài khoản thử nghiệm: <b>abcxyz</b> / mật khẩu <b>123</b></p>
+
+      <div class="divider"><span>hoặc</span></div>
+      <button type="button" id="guestBtn" class="ghost">Tiếp tục với tư cách khách</button>
+      <p class="hint small">Khách xem được sản phẩm và thêm vào giỏ, nhưng cần có tài khoản để thanh toán.</p>
     </form>
 
-    <!-- Chế độ 2: khách -->
-    <div id="panelGuest" role="tabpanel" aria-labelledby="tabGuest" hidden>
-      <p class="guest-text">Xem sản phẩm và thêm vào giỏ hàng mà không cần tài khoản. Bạn có thể đăng nhập lại bất cứ lúc nào.</p>
-      <button type="button" id="guestBtn" class="primary dark">Tiếp tục với tư cách khách</button>
-    </div>
+    <!-- Tab 2: đăng ký -->
+    <form id="panelRegister" role="tabpanel" aria-labelledby="tabRegister" novalidate hidden>
+      <label for="rUser">Tên đăng nhập</label>
+      <input id="rUser" type="text" autocomplete="username" placeholder="3-20 ký tự: chữ thường, số, gạch dưới">
 
-    <!-- Chế độ 3: quản trị viên -->
+      <label for="rEmail">Email</label>
+      <input id="rEmail" type="email" autocomplete="email" placeholder="ten@gmail.com">
+
+      <label for="rPass">Mật khẩu</label>
+      <div class="pass">
+        <input id="rPass" type="password" autocomplete="new-password" placeholder="Ít nhất 6 ký tự">
+        <button type="button" class="toggle-pass" data-for="rPass" aria-label="Hiện mật khẩu">Hiện</button>
+      </div>
+
+      <label for="rPass2">Nhập lại mật khẩu</label>
+      <input id="rPass2" type="password" autocomplete="new-password" placeholder="Nhập lại mật khẩu">
+
+      <p id="rMsg" class="msg" role="alert" aria-live="polite"></p>
+      <button type="submit" class="primary">Tạo tài khoản</button>
+    </form>
+
+    <!-- Tab 3: quản trị viên -->
     <form id="panelAdmin" role="tabpanel" aria-labelledby="tabAdmin" novalidate hidden>
       <p class="admin-note">Khu vực dành riêng cho quản trị viên của cửa hàng.</p>
 

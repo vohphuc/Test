@@ -1,6 +1,6 @@
 'use strict';
 
-/*Tiện ích dùng chung*/
+/* ================= Tiện ích dùng chung ================= */
 const $ = id => document.getElementById(id);
 const fmt = n => n.toLocaleString('vi-VN') + '₫';
 const esc = s => String(s).replace(/[&<>"']/g, c =>
@@ -10,11 +10,18 @@ const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '
 const readJSON = (key, fallback) => { try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch { return fallback; } };
 const writeJSON = (key, val) => { try { localStorage.setItem(key, JSON.stringify(val)); } catch {} };
 
+/* ================= Dữ liệu sản phẩm ================= */
+// Dữ liệu nằm trong products.js, file đó PHẢI được nạp trước script.js
+if (typeof products === 'undefined') throw new Error('Thiếu products.js: hãy nạp products.js trước script.js trong file HTML.');
+
 // Tra cứu nhanh theo id
 const productById = {};
-Object.values(products).flat().forEach(p => { productById[p.id] = p; });
+Object.entries(products).forEach(([key, list]) => list.forEach(p => {
+  p.type = p.type || key;   // mặc định loại = tên nhóm; ghi đè bằng type: 'laptop' nếu cần
+  productById[p.id] = p;
+}));
 
-/*Hiển thị thẻ sản phẩm*/
+/* ================= Hiển thị thẻ sản phẩm ================= */
 const addBtn = p => '<button class="add" data-id="' + esc(p.id) + '">Thêm vào giỏ</button>';
 const priceHTML = p =>
   (p.oldPrice ? '<s>' + fmt(p.oldPrice) + '</s>' : '') + '<em>' + fmt(p.price) + '</em>';
@@ -29,7 +36,11 @@ function cardHTML(p) {
 
 document.querySelectorAll('.row').forEach(row => {
   const frag = document.createDocumentFragment();
-  (products[row.dataset.cat] || []).forEach(p => {
+  // Trang chủ: lấy theo data-cat. Trang danh mục: lấy mọi sản phẩm theo data-type
+  const list = row.dataset.type
+    ? Object.values(productById).filter(p => p.type === row.dataset.type)
+    : (products[row.dataset.cat] || []);
+  list.forEach(p => {
     const d = document.createElement('div');
     d.className = 'card';
     d.dataset.id = p.id;
@@ -42,8 +53,8 @@ document.querySelectorAll('.row').forEach(row => {
   row.appendChild(frag);
 });
 
-/*Giỏ hàng*/
-// Giỏ chỉ lưu id, qty, tên và giá luôn lấy từ dữ liệu sản phẩm
+/* ================= Giỏ hàng ================= */
+// Giỏ chỉ lưu {id, qty}; tên và giá luôn lấy từ dữ liệu sản phẩm
 const saved = readJSON('cart', []);
 let cart = (Array.isArray(saved) ? saved : []).filter(x => productById[x.id] && x.qty > 0);
 
@@ -69,7 +80,7 @@ function renderCart() {
       '<div class="qty"><button data-act="dec" data-id="' + id + '" aria-label="Giảm">−</button>' +
       '<span>' + x.qty + '</span>' +
       '<button data-act="inc" data-id="' + id + '" aria-label="Tăng">+</button></div>' +
-      '<button class="rm" data-act="rm" data-id="' + id + '" aria-label="Xóa">Xóa</button></li>';
+      '<button class="rm" data-act="rm" data-id="' + id + '" aria-label="Xóa">🗑</button></li>';
   }).join('') : '<li class="empty">Giỏ hàng đang trống. Chọn sản phẩm để thêm vào giỏ.</li>';
 
   $('cartTotal').textContent = fmt(cart.reduce((s, x) => s + productById[x.id].price * x.qty, 0));
@@ -89,12 +100,27 @@ $('closeCart').addEventListener('click', () => toggleCart(false));
 overlay.addEventListener('click', () => toggleCart(false));
 $('checkout').addEventListener('click', () => {
   if (!cart.length) return alert('Giỏ hàng đang trống.');
-  alert('Chức năng thanh toán sẽ được thêm sau.');
+  // Chỉ tài khoản đã đăng ký/đăng nhập mới được thanh toán (khách và chưa đăng nhập thì không)
+  const u = readJSON('user', null);
+  if (!u || u.mode !== 'user') {
+    if (confirm('Bạn cần đăng nhập bằng tài khoản để thanh toán.\nChuyển đến trang đăng nhập / đăng ký?')) location.href = 'dangnhap.html';
+    return;
+  }
+  const items = cart.map(x => {
+    const p = productById[x.id];
+    return { id: x.id, name: p.name, price: p.price, qty: x.qty };
+  });
+  const orders = readJSON('orders', []);
+  orders.push({ id: 'DH' + Date.now(), date: new Date().toISOString(), user: u.name, items,
+    total: items.reduce((s, i) => s + i.price * i.qty, 0) });
+  writeJSON('orders', orders);
+  cart = []; renderCart(); toggleCart(false);
+  alert('Đặt hàng thành công! Cảm ơn ' + u.name + '.');
 });
 
-/*Banner băng chuyền*/
+/* ================= Banner băng chuyền ================= */
 (function () {
-  if (!document.getElementById('banner')) return;
+  if (!$('banner')) return;   // trang không có banner thì bỏ qua
   const box = $('banner'), slides = $('slides'), dotsBox = $('dots');
   const count = slides.children.length;
   const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -128,7 +154,7 @@ $('checkout').addEventListener('click', () => {
   mark(); start();
 })();
 
-/*Tìm kiếm*/
+/* ================= Tìm kiếm ================= */
 const searchInput = $('searchInput'), searchBox = $('searchResults');
 // Chuẩn hóa tên một lần duy nhất thay vì mỗi lần gõ
 const searchIndex = Object.values(productById).map(p => ({ p, n: norm(p.name) }));
@@ -152,7 +178,7 @@ searchInput.addEventListener('keydown', e => {
   if (e.key === 'Escape') { searchBox.hidden = true; searchInput.blur(); }
 });
 
-/*Chi tiết sản phẩm + bình luận*/
+/* ================= Chi tiết sản phẩm + bình luận ================= */
 const modal = $('pmodal');
 let currentProduct = null, lastFocus = null;
 const stars = n => '★'.repeat(n) + '☆'.repeat(5 - n);
@@ -170,7 +196,7 @@ function renderComments() {
     ? '★ ' + (list.reduce((s, c) => s + c.rating, 0) / list.length).toFixed(1) + ' (' + list.length + ' đánh giá)'
     : 'Chưa có đánh giá';
 }
-//Check info sản phẩm.
+
 function openProduct(id) {
   const p = productById[id];
   if (!p) return;
@@ -195,7 +221,7 @@ function closeProduct() {
   document.body.style.overflow = '';
   if (lastFocus) lastFocus.focus();
 }
-//đóng info sản phẩm
+
 modal.addEventListener('click', e => { if (e.target === modal) closeProduct(); });
 $('pmClose').addEventListener('click', closeProduct);
 $('pmAdd').addEventListener('click', () => {
@@ -218,7 +244,7 @@ $('cmForm').addEventListener('submit', e => {
   renderComments();
 });
 
-/*Xử lý click, phím chung*/
+/* ================= Xử lý click / phím chung (một chỗ duy nhất) ================= */
 document.addEventListener('click', e => {
   const t = e.target;
   if (!t.closest('.sbox')) searchBox.hidden = true;     // bấm ra ngoài thì đóng gợi ý
@@ -245,33 +271,3 @@ document.addEventListener('keydown', e => {
 });
 
 renderCart();
-
-/*Trạng thái đăng nhập*/
-const user = readJSON('user', null);
-const loginLink = document.querySelector('a.act[href="dangnhap.html"]');
-if (user && loginLink) {
-  loginLink.lastChild.textContent = user.name;
-  loginLink.addEventListener('click', e => {
-    e.preventDefault();
-    if (confirm('Đăng xuất khỏi tài khoản "' + user.name + '"?')) {
-      try { localStorage.removeItem('user'); } catch {}
-      location.reload();
-    }
-  });
-}
-
-//Trạng thái đăng nhập
-if (user && loginLink) {
-  loginLink.lastChild.textContent = user.name;
-  if (user.mode === 'admin') {
-    loginLink.href = 'admin.html';
-  } else {
-    loginLink.addEventListener('click', e => {
-      e.preventDefault();
-      if (confirm('Đăng xuất khỏi tài khoản "' + user.name + '"?')) {
-        try { localStorage.removeItem('user'); } catch {}
-        location.reload();
-      }
-    });
-  }
-}

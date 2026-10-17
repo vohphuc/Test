@@ -35,3 +35,11 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-off
 .guest-text{margin-bottom:18px}
 .admin-note{background:#c0281c14;color:var(--danger);border-radius:8px;padding:10px 12px;font-size:14px}
 [hidden]{display:none!important}
+
+.link{border:0;background:none;color:var(--accent);font:inherit;font-weight:700;cursor:pointer;text-decoration:underline;padding:0}
+
+.divider{display:flex;align-items:center;gap:12px;margin:18px 0 14px;color:var(--muted);font-size:13px}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.ghost{width:100%;padding:12px;border:1px solid #111;border-radius:10px;background:#fff;color:#111;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.ghost:hover{background:#f0f0f0}
+.hint.small{font-size:12px;margin-top:10px}
