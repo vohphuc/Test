@@ -1,0 +1,131 @@
+/* ============================================================
+   RESPONSIVE: iPhone (≈393–440px) và iPad Pro (≈834–1032px dọc, 1194–1376px ngang)
+   Nạp file này CUỐI CÙNG, sau mọi file CSS khác trong <head>.
+   Mốc chia theo độ rộng màn hình (CSS px), không theo tên máy:
+     ≤ 600px   : điện thoại
+     601–1100px: máy tính bảng (iPad Pro dọc)
+     > 1100px  : máy tính / iPad Pro nằm ngang (dùng giao diện đầy đủ)
+   ============================================================ */
+
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+button,a,select,summary{touch-action:manipulation}
+img{max-width:100%}
+.drawer-foot{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+.drawer{height:100dvh}
+.pm-box{max-height:92dvh}
+
+/* ---------- Thiết bị cảm ứng: nút đủ lớn, chữ ô nhập 16px (iOS không tự zoom khi bấm vào ô) ---------- */
+@media (pointer:coarse){
+  input,select,textarea{font-size:16px!important}
+  .add,.chip,.cat a,.nav a,.pm-actions button,.cm-send,.primary,.ghost,.tabs button,.tab,.btn,.act,.del{min-height:44px}
+  .nav a,.cat a{display:inline-flex;align-items:center}
+  .qty button,.rm,.drawer-head button,.pm-close,.toggle-pass{min-width:44px;min-height:44px}
+  .card:hover{filter:none}
+}
+
+/* ============ MÁY TÍNH BẢNG: iPad Pro dọc (601–1100px) ============ */
+@media (max-width:1100px){
+  header{padding:14px 20px;gap:14px}
+  .search h2{font-size:20px}
+  .nav{gap:18px}
+  .logo{width:72px;height:72px}
+  .hero{flex-wrap:wrap;padding-right:14px}
+  .cat{width:136px}
+  .banner{min-width:0}
+  .ad{flex:1 1 100%}
+  .ad img{height:auto;min-height:0;max-height:170px}
+  .row{grid-template-columns:repeat(4,1fr)}
+  .card{min-width:0}
+  .page-head,.sec h2{padding-left:20px;padding-right:20px}
+  footer{grid-template-columns:repeat(2,1fr);padding:28px 24px}
+  .pm-box{width:min(760px,94%)}
+}
+@media (max-width:900px){
+  .row{grid-template-columns:repeat(3,1fr)}
+}
+
+/* ============ ĐIỆN THOẠI: iPhone (≤600px) ============ */
+@media (max-width:600px){
+  /* Header gọn: logo bên trái, giỏ hàng + đăng nhập bên phải, tìm kiếm và menu xuống dòng dưới */
+  header{padding:10px 12px;gap:8px 10px;align-items:center}
+  .logo{width:52px;height:52px}
+  .acts{margin-left:auto;gap:12px}
+  .act{font-size:12px}
+  .act img{width:32px;height:32px}
+  .mid{order:3;flex:1 1 100%;min-width:0}
+  .search{gap:0}
+  .search h2{display:none}
+  .search .sbox{width:100%}
+  .nav{justify-content:flex-start;gap:6px;margin-top:8px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{padding:6px 10px;border-radius:999px;background:#0001}
+  .results{max-height:60dvh}
+
+  /* Danh mục và banner */
+  .hero{flex-direction:column;gap:10px;padding:12px 0 0}
+  .cat{width:100%;border-radius:0;flex-direction:row;overflow-x:auto;justify-content:flex-start;padding:4px 8px;gap:4px}
+  .cat a{white-space:nowrap;padding:10px 14px}
+  .banner{margin:0 12px}
+  .slides{border-radius:10px}
+  .slides img{min-height:140px}
+  .nav-btn{display:none}                /* đã có vuốt tay và chấm tròn */
+  .ad{margin:0 12px}
+
+  /* Lưới sản phẩm 2 cột */
+  .sec-head{flex-direction:column;align-items:flex-start;gap:2px;padding-right:12px}
+  .sec h2,.sec-sub,.page-head{padding-left:12px;padding-right:12px}
+  .sec h2{font-size:20px}
+  .row{grid-template-columns:repeat(2,1fr)}
+  .row .card{min-width:0;min-height:0;padding:8px}
+  .row .card:nth-child(n+3){border-top:1px solid var(--line)}
+  .card b{font-size:13px}
+  .card .price em,.card .price s{font-size:13px}
+  .card .img{min-height:110px}
+  .more{font-size:14px}
+
+  /* Thanh lọc và sắp xếp trên trang danh mục */
+  .page-head h1{font-size:26px}
+  .chips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none}
+  .toolbar{flex-direction:column;align-items:stretch}
+  .tools{justify-content:space-between}
+  .tools select{flex:1}
+  .promo{padding:14px 16px}
+
+  /* Giỏ hàng toàn chiều rộng, cửa sổ chi tiết dạng "ngăn kéo từ dưới lên" */
+  .drawer{width:100%}
+  .pmodal{padding:0;align-items:flex-end}
+  .pm-box{width:100%;max-height:94dvh;border-radius:16px 16px 0 0;padding:18px 14px calc(18px + env(safe-area-inset-bottom,0px))}
+  .pm-top{gap:14px}
+  .pm-img{min-height:200px;flex-basis:100%}
+  .pm-info{flex-basis:100%}
+  .pm-info h3{font-size:20px}
+  .pm-price em{font-size:24px}
+  .pm-actions button{flex:1 1 100%}
+  .cm-row{flex-direction:column}
+  .cm-row input,.cm-row select{flex:none;width:100%}
+
+  /* Chân trang một cột */
+  footer{grid-template-columns:1fr;padding:24px 16px;gap:20px}
+
+  /* Trang đăng nhập */
+  .wrap{padding:16px 12px}
+  .box{padding:24px 16px}
+  .tabs button{font-size:12px;padding:10px 2px}
+
+  /* Trang quản trị */
+  .top{padding:12px 14px}
+  .tabs{padding:8px 8px 0}
+  .tab{padding:10px 14px}
+  .wrap .frm{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  th,td{padding:9px 10px;font-size:13px}
+}
+
+/* Điện thoại xoay ngang: bớt chiều cao header */
+@media (max-height:480px) and (orientation:landscape){
+  .logo{width:44px;height:44px}
+  .drawer-head,.drawer-foot{padding-top:8px;padding-bottom:8px}
+}
